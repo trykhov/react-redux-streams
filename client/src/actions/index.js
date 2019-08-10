@@ -1,5 +1,5 @@
 import { SIGN_IN, SIGN_OUT } from './types';
-import streams from '../apis/streams';
+import streams from '../api/streams';
 
 export const signIn = userId => {
   return {
