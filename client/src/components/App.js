@@ -1,16 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Route} from 'react-router-dom';
+import { Router, Route} from 'react-router-dom'; // change Browswer Route to Router due to import history
 import StreamCreate from './streams/StreamCreate';
 import StreamDelete from './streams/StreamDelete';
 import StreamEdit from './streams/StreamEdit';
 import StreamList from './streams/StreamList';
 import StreamShow from './streams/StreamShow';
 import Header from './Header';
+import history from '../history'; // need to change BrowseraRouter to just Router
 
 const App = () => {
   return(
     <div>
-      <BrowserRouter>
+      <Router history={history}>
         <Header /> {/* Header must be inside BrowserRouter because of the Link inside Header */}
         <div>
           <Route path='/' component={StreamList} exact/>
@@ -19,7 +20,7 @@ const App = () => {
           <Route path='/streams/edit' component={StreamEdit} />
           <Route path='/streams/show' component={StreamShow} />
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };
