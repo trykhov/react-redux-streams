@@ -6,16 +6,14 @@ import { fetchStreams } from '../../actions';
 class StreamList extends React.Component {
 
   componentDidMount() {
-    this.props.fetchStreams();
+    this.props.fetchStreams(); // fetchStreams is an action
   }
 
   renderAdmin = stream => {
-    if(stream.userId === this.props.currentUserId) {
+    if(stream.userId === this.props.currentUserId) { // if user is logged in, then there is a prop that has the property of the login ID
       return (
         <div className="right floated content">
-          <button className="ui button primary">
-            Edit
-          </button>
+          <Link to={`/streams/edit/${stream.id}`} className="ui button primary">Edit</Link>
           <button className="ui button negative">
             Delete
           </button>
@@ -24,11 +22,11 @@ class StreamList extends React.Component {
     }
   }
 
-  renderList = () => {
+  renderList = () => { // returns the list of streams
     return this.props.streams.map(stream => {
-      return(
+      return( 
         <div className="item" key={stream.id}>
-          {this.renderAdmin(stream)}
+          {this.renderAdmin(stream)} {/* looks to see if stream was made by the user*/}
           <i className="large middle aligned icon camera"/>
           <div className="content">
             {stream.title}
@@ -39,7 +37,7 @@ class StreamList extends React.Component {
     })
   }
 
-  renderCreate = () => {
+  renderCreate = () => { // allows user to create stream
     if(this.props.isSignedIn) {
       return (
         <div style={{textAlign: "right"}}>
@@ -55,8 +53,8 @@ class StreamList extends React.Component {
     return(
       <div>
         <h2>Streams</h2>
-        <div className="ui celled list">{this.renderList()}</div>
-        {this.renderCreate()}
+        <div className="ui celled list">{this.renderList()}</div> {/* shows the list of streams */}
+        {this.renderCreate()} {/* the create button */}
       </div>
     ) 
   }

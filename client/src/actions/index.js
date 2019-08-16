@@ -24,10 +24,10 @@ export const signOut = () => {
 
 export const createStream = formValues => async (dispatch, getState) => {
   const { userId } = getState().auth;
-  const response = await streams.post('/streams', {...formValues, userId});
-  dispatch({ type: CREATE_STREAM, payload: response.data });
-  history.push('/');
-};
+  const response = await streams.post('/streams', {...formValues, userId}); // waits for creating stream
+  dispatch({ type: CREATE_STREAM, payload: response.data }); // enters info
+  history.push('/');  // goes to homepage after publishing (only if api is running)
+}; 
 
 export const fetchStreams = () => async dispatch => {
   const response = await streams.get('/streams');
